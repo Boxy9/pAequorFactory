@@ -11,7 +11,7 @@ const mockUpStrand = () => {
         newStrand.push(returnRandBase());
     }
     return newStrand;
-};
+}
 const pAequorFactory = (specimenNum, dna) => {
     return {
         _specimenNum: specimenNum,
