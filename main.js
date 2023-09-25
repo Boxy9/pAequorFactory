@@ -12,6 +12,7 @@ const mockUpStrand = () => {
     }
     return newStrand;
 }
+
 const pAequorFactory = (specimenNum, dna) => {
     return {
         _specimenNum: specimenNum,
@@ -34,13 +35,15 @@ const pAequorFactory = (specimenNum, dna) => {
         compareDNA(compDNA) {
             let sameCount = 0;
             let x = 0;
-            for (base of compDNA) {
-                if (base === this.dna[x]) {
+            console.log(compDNA);
+            console.log(this);
+            for (base of compDNA._dna) {
+                if (base === this._dna[x]) {
                     sameCount++;
                 }
                 x++;
             }
-            return Math.round((sameCount / compDNA.length) * 100);
+            return Math.round((sameCount / compDNA._dna.length) * 100) + '% equality';
         },
         willLikelySurvive() {
             let survive = 0;
@@ -71,16 +74,20 @@ const pAequorFactory = (specimenNum, dna) => {
     };
 };
 let dnaSurviverSamples = [];
-let sample = pAequorFactory();
-let i = 1;
-while (i <= 30) {
+let sample = '';
+let nextSpecNum = 1; 
+while (nextSpecNum <= 30) {
 
-    sample = pAequorFactory(i, pAequorFactory().mutate());
+    sample = pAequorFactory(nextSpecNum, pAequorFactory().mutate());
 
     if (sample.willLikelySurvive()) {
         dnaSurviverSamples.push(sample);
-        i++;
+        nextSpecNum++;
     }
 }
-const strand = pAequorFactory().mutate();
-console.log(strand);
+
+const inst = pAequorFactory(nextSpecNum,mockUpStrand);
+const strand = inst.mutate();
+console.log(inst);
+console.log(dnaSurviverSamples[0].compareDNA(dnaSurviverSamples[29]));
+nextSpecNum++; // for next sample..
