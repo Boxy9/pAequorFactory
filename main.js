@@ -35,8 +35,8 @@ const pAequorFactory = (specimenNum, dna) => {
         compareDNA(compDNA) {
             let sameCount = 0;
             let x = 0;
-            console.log(compDNA);
-            console.log(this);
+            // console.log(compDNA);
+            // console.log(this);
             for (base of compDNA._dna) {
                 if (base === this._dna[x]) {
                     sameCount++;
